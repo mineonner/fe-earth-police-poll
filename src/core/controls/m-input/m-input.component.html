@@ -1,0 +1,5 @@
+<div  class="form-control">
+  <label *ngIf="title">{{title}}<span *ngIf="isRequired" class="required">*</span></label>
+  <input type="text"  [maxLength]="maxLength" [(ngModel)]="value" (input)="onInputChange($event.target.value)" [id]="id">
+  <span class="input-length">{{ !!value ? value?.length : 0 }} / {{maxLength}}</span>
+</div>

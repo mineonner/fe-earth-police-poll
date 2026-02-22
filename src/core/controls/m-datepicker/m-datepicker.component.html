@@ -1,0 +1,9 @@
+<div class="form-control">
+  <label *ngIf="title">{{title}}<span *ngIf="isRequired" class="required">*</span></label>
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker" [placeholder]="placeholder" [readonly]="true" (click)="picker.open()"
+      (dateInput)="setDateFomat($event)" [(ngModel)]="valueClone">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</div>

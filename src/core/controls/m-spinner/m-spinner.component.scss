@@ -1,0 +1,8 @@
+::ng-deep .spiner{
+  width: 35px !important;
+  height: 35px !important;
+
+  .mdc-circular-progress__indeterminate-circle-graphic{
+    stroke: var(--spinner-color) !important;
+  }
+}

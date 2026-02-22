@@ -1,0 +1,14 @@
+<ng-container *ngIf="loader then loaderBox else dataBox"></ng-container>
+
+<ng-template #loaderBox>
+  <m-loader [theme]="{ width: '100%', 'border-radius': '15px', height: '200px' }"></m-loader>
+</ng-template>
+
+<ng-template #dataBox>
+  <section class="evaluators-amount-widget">
+    <p class="title">{{title}}</p>
+    <p class="evaluators-count">{{data?.evaluatorsCount | number:'1.0-2'}} <span>คน</span></p>
+    <p class="evaluators-total">จำนวนกลุ่มตัวอย่างทั้งหมด: {{data?.evaluatorsTotal | number:'1.0-2'}} คน</p>
+    <p class="evluation-date">ข้อมูล ณ วันที่ {{data?.evluationDate | mDate}}</p>
+  </section>
+</ng-template>

@@ -1,0 +1,19 @@
+::ng-deep .mat-mdc-tab-group{
+  .mat-mdc-tab-body{
+    margin-top: 1rem;
+  }
+}
+
+::ng-deep .average-score-content {
+    background-color: #040a66;
+    border-radius: 15px;
+    color: #ffffff;
+    text-align: center;
+    font-size: 2rem;
+    width: 75%;
+    margin: auto;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }

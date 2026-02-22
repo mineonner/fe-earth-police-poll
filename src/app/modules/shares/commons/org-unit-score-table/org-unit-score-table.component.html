@@ -1,0 +1,86 @@
+<div class="my-4 text-right">
+  <button class="btn-export" (click)="export()">Export</button>
+</div>
+
+<table matSort (matSortChange)="sortData($event)" class="org-unit-score-table table-auto">
+  <thead>
+    <tr>
+      <th rowspan="2" mat-sort-header="org_unit_code" class="text-center">รหัสหน่วยงาน</th>
+      <th rowspan="2" mat-sort-header="org_unit_name" class="max-w-[200px] w-[200px] text-center">หน่วยงาน</th>
+      <th colspan="4" class="text-center">คะแนนความพึงพอใจ สภ./สน.</th>
+      <th rowspan="2" mat-sort-header="average_total_score" class="max-w-[200px] w-[200px] text-center">
+        คะแนนความพึงพอใจโดยรวม</th>
+      <th rowspan="2" class="max-w-[200px] w-[200px] text-center">ผลประเมิน</th>
+
+    </tr>
+    <tr>
+      <th mat-sort-header="service_work_score" class="text-center">งานบริการสถานีตำรวจ</th>
+      <th mat-sort-header="investigative_work_score" class="text-center">งานสืบสวนสอบสวน</th>
+      <th mat-sort-header="crime_prevention_work_score" class="text-center">งานป้องกันปราบปรามอาชญากรรม</th>
+      <th mat-sort-header="traffic_work_score" class="text-center">งานจราจร</th>
+      <!-- <th mat-sort-header="average_total_score" class="text-center">คะแนนความพึงพอใจโดยรวม</th> -->
+    </tr>
+  </thead>
+
+  <tbody *ngIf="sortedData.length == 0">
+    <tr>
+      <td colspan="9">ไม่มีข้อมูล</td>
+    </tr>
+  </tbody>
+
+  <tbody *ngIf="sortedData.length > 0">
+    <ng-container *ngFor="let item of sortedData;">
+      <tr [ngClass]="{'head-bch' : item.org_unit_role == 'RO2' && !item.is_evaluation,
+          'head-bk' : item.org_unit_role == 'RO3' && !item.is_evaluation,
+          'head-kk' : item.org_unit_role == 'RO4' && !item.is_evaluation}">
+
+        <ng-container *ngIf="!item.is_evaluation">
+          <td colspan="2" class="text-center">{{item.org_unit_name}}</td>
+        </ng-container>
+
+        <ng-container *ngIf="item.is_evaluation">
+          <td>{{item.org_unit_code}}</td>
+          <td>{{item.org_unit_name}}</td>
+        </ng-container>
+
+
+        <td class="text-center">{{item.service_work_score == 0 ? '-' : item.service_work_score}}</td>
+        <td class="text-center">{{item.investigative_work_score == 0 ? '-' : item.investigative_work_score}}</td>
+        <td class="text-center">{{item.crime_prevention_work_score == 0 ? '-' : item.crime_prevention_work_score}}</td>
+        <td class="text-center">{{item.traffic_work_score == 0 ? '-' : item.traffic_work_score}}</td>
+        <!-- <td class="text-center">{{item.satisfaction_score}}</td> -->
+        <td class="text-center">{{item.average_total_score}}</td>
+
+        <td *ngIf="0 <= item.average_total_score && item.average_total_score <= 2.33" class="bad text-center">
+          ผลประเมินอยู่ในระดับปรับปรุง</td>
+        <td *ngIf="2.34 <= item.average_total_score && item.average_total_score <= 3.66" class="normal text-center">
+          ผลประเมินอยู่ในระดับพอใช้</td>
+        <td *ngIf="3.67 <= item.average_total_score && item.average_total_score <= 5" class="good text-center">
+          ผลประเมินอยู่ในระดับดี</td>
+      </tr>
+
+      <!-- <tr *ngIf="!item.is_head">
+        <td>{{item.org_unit_code}}</td>
+        <td>{{item.org_unit_name}}</td>
+        <td class="text-center">{{item.service_work_score}}</td>
+        <td class="text-center">{{item.investigative_work_score}}</td>
+        <td class="text-center">{{item.crime_prevention_work_score}}</td>
+        <td class="text-center">{{item.traffic_work_score}}</td>
+        <td class="text-center">{{item.satisfaction_score}}</td>
+        <td class="text-center">{{item.average_total_score}}</td>
+
+        <td *ngIf="0 <= item.average_total_score && item.average_total_score <= 2.33" class="bad text-center">
+          ผลประเมินอยู่ในระดับปรับปรุง</td>
+        <td *ngIf="2.34 <= item.average_total_score && item.average_total_score <= 3.66" class="normal text-center">
+          ผลประเมินอยู่ในระดับพอใช้</td>
+        <td *ngIf="3.67 <= item.average_total_score && item.average_total_score <= 5" class="good text-center">
+          ผลประเมินอยู่ในระดับดี</td>
+      </tr> -->
+    </ng-container>
+
+  </tbody>
+</table>
+
+<section>
+  <m-pagination [items]="sortedDataClone" (changePage)="onChangePage($event)"></m-pagination>
+</section>

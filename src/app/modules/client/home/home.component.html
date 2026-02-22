@@ -1,0 +1,81 @@
+<section class="home-content" >
+  <article class="police-background">
+
+  </article>
+
+  <article class="top-bar">
+    <img class="logo" src="/assets/images/Emblem_of_Royal_Thai_Police.png">
+    <img class="logo" src="/assets/images/มสด.png">
+  </article>
+
+  <section class="summary-container">
+    <article class="summary-content">
+      <article class="summary-info">
+        <p class="title-text">ข้อมูลการประเมินความพึงพอใจที่ประชาชนหรือผู้รับบริการ
+          ได้รับจากการให้บริการของข้าราชการตำรวจ ประจำปีงบประมาณ พ.ศ. 2568</p>
+
+        <div class="grid grid-cols-4 gap-4 mt-6">
+
+          <div class="summary-detail bg-red">
+            <p class="sum-de-title">จำนวนหน่วยงาน <br>ทั้งหมด</p>
+            <p class="sum-de-count">{{dataOrgUnitEvaluation?.org_unit_total | number:'1.0-2'}} <span>หน่วยงาน</span></p>
+          </div>
+
+          <div class="summary-detail bg-pink">
+            <p class="sum-de-title">จำนวนหน่วยงาน<br>ที่ดำเนินการครบถ้วน</p>
+            <p class="sum-de-count">{{dataOrgUnitEvaluation?.org_unit_evaluation_complete | number:'1.0-2'}} <span>หน่วยงาน</span></p>
+          </div>
+
+          <div class="summary-detail bg-green">
+            <p class="sum-de-title">จำนวนเป้าหมาย<br>กลุ่มตัวอย่าง</p>
+            <p class="sum-de-count">{{dataOrgUnitEvaluation?.evaluators_total | number:'1.0-2'}} <span>คน</span></p>
+          </div>
+
+          <div class="summary-detail bg-yellow">
+            <p class="sum-de-title">จำนวนผู้ตอบ<br>แบบสอบถาม</p>
+            <p class="sum-de-count">{{dataOrgUnitEvaluation?.evaluators_amount | number:'1.0-2'}} <span>คน</span></p>
+          </div>
+        </div>
+      </article>
+    </article>
+  </section>
+
+
+  <section class="filter-org-container">
+    <article class="filter-org-content">
+      <p class="title-text">ข้อมูลความคืบหน้ารายหน่วยงาน (สามารถเลือกตามหน่วยงานได้)</p>
+
+      <filter-org-unit [isClient]="true" (filterChange)="onFilterChange($event)"></filter-org-unit>
+
+      <div class="grid grid-cols-2 gap-4 mt-6 max-w-[1000px] m-auto">
+
+        <div class="org-detail bg-green">
+          <p class="org-title">จำนวนเป้าหมายกลุ่มตัวอย่าง</p>
+          <p class="org-count">{{dataEvaluationProgress?.evaluators_total | number:'1.0-2'}} <span>คน</span></p>
+        </div>
+
+        <div class="org-detail bg-pink">
+          <p class="org-title">จำนวนผู้ตอบแบบสอบถาม</p>
+          <p class="org-count">{{dataEvaluationProgress?.evaluators_amount | number:'1.0-2'}} <span>คน</span></p>
+        </div>
+
+      </div>
+
+
+      <div class="four-score" *ngIf="isShowFourTypeScore">
+        <p class="title-text mt-[2rem]">ร้อยละผู้ตอบแบบสอบถาม</p>
+        <chart-widget [chartOptions]="chartOptions"></chart-widget>
+      </div>
+
+
+    </article>
+  </section>
+
+  <section class="banner-container">
+    <a href="https://sites.google.com/view/rtp-pss-doc/%E0%B8%AB%E0%B8%99%E0%B8%B2%E0%B9%81%E0%B8%A3%E0%B8%81"
+      target="_blank"><img src="/assets/images/brandner-rtp-pss.png"></a>
+  </section>
+
+
+
+</section>

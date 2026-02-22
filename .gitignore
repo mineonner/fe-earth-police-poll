@@ -1,0 +1,75 @@
+# ============================================================
+# Angular / Node.js
+# ============================================================
+
+## Dependencies
+node_modules/
+jspm_packages/
+.pnp/
+.pnp.js
+
+## Build output
+dist/
+tmp/
+out-tsc/
+bazel-out/
+
+## Angular Cache
+.angular/
+.cache/
+
+## Environment files
+.env
+.env.*
+!.env.example
+src/environments/environment.local.ts
+
+## Testing
+coverage/
+.nyc_output/
+
+## Misc
+.sass-cache/
+connect.lock/
+libpeerconnection.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+testem.log
+/typings
+
+## Package lock (เลือกเก็บอันใดอันหนึ่งตาม package manager ที่ใช้)
+# package-lock.json
+# yarn.lock
+
+# ============================================================
+# macOS
+# ============================================================
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+.fseventsd
+
+# ============================================================
+# Azure / Secrets
+# ============================================================
+*.pubxml
+*.pubxml.user
+local.settings.json
+.azure/
+ServicePrincipal.json
+
+# ============================================================
+# General
+# ============================================================
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*.orig
+Thumbs.db

@@ -1,0 +1,103 @@
+.upload-file{
+  label{
+    font-size: var(--font-size-default);
+    font-weight: var(--font-weight-default);
+    color: var(--second-color);
+  }
+
+  span{
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--second-color);
+  }
+
+  button{
+    font-size: var(--font-size-default);
+    font-weight: var(--font-weight-default);
+    color: #fff;
+    background-color: var(--second-color);
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+  }
+
+  button:hover{
+    background-color: var(--primary-color);;
+  }
+}
+
+::ng-deep .ngx-file-drop__drop-zone{
+  border: 2px dotted  var(--second-color) !important;
+}
+
+.table-content{
+  overflow-x:auto;
+}
+
+.table{
+  width: 100%;
+  border: 2px solid  var(--second-color);
+  font-size: var(--font-size-default);
+  font-weight: var(--font-weight-default);
+
+  tr>th{
+    padding: 0.5rem;
+    border: 2px solid  var(--second-color);
+  }
+}
+
+.icon-delete{
+  color: var(--error-color);
+}
+
+.file-link{
+  color:  var(--primary-color);
+}
+
+.file-link:hover{
+  color: var(--second-color);
+}
+
+::ng-deep {
+  body.tablet {
+    .upload-file{
+      label{
+        font-size: 0.9rem !important;
+      }
+
+      span{
+        font-size: 0.7rem !important;
+      }
+
+      button{
+        font-size: 0.9rem !important;
+      }
+    }
+
+    .table{
+      font-size: 0.9rem;
+    }
+  }
+
+  body.mobile {
+    .upload-file{
+      label{
+        font-size: 0.8rem !important;
+      }
+
+      span{
+        font-size: 0.5rem !important;
+      }
+
+      button{
+        font-size: 0.8rem !important;
+      }
+    }
+
+    .table{
+      font-size: 0.8rem;
+    }
+  }
+}
+
+
+

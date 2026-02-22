@@ -1,0 +1,48 @@
+<div [ngClass]="{'backdrop' : isShowMenuSidebar}" (click)="toggleMenuSidebar()">
+
+</div>
+
+<nav class="menu-sidebar" [ngClass]="{'close-menu-sidebar' : !isShowMenuSidebar}">
+  <article class="sidebar-header">
+    <div></div>
+    <button (click)="toggleMenuSidebar()">
+      <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
+        <path
+          d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm120-80v-560H200v560h120Zm80 0h360v-560H400v560Zm-80 0H200h120Z" />
+      </svg>
+    </button>
+  </article>
+
+  <article class="sidebar-content">
+    <ul class="menu-content" [ngClass]="{'menu-content-hide' : !isShowMenuSidebar}">
+
+      <li><a routerLink="/admin/dashboard" routerLinkActive="active" ariaCurrentWhenActive="page" class="menu-link">
+          <div [ngClass]="{'active-indicator' : isShowMenuSidebar}"></div>
+          <fa-icon icon="home"></fa-icon><span class="menu-text">Dashboard</span>
+        </a></li>
+
+      <li *ngIf="userData.role_code == 'RO1'"><a routerLink="/admin/org-unit-master" routerLinkActive="active"
+          ariaCurrentWhenActive="page" class="menu-link">
+          <div [ngClass]="{'active-indicator' : isShowMenuSidebar}"></div>
+          <fa-icon icon="building" class="pl-1"></fa-icon><span class="menu-text">หน่วยงาน</span>
+        </a></li>
+
+      <li *ngIf="userData.role_code == 'RO1'"><a routerLink="/admin/import-evoluation" routerLinkActive="active"
+          ariaCurrentWhenActive="page" class="menu-link">
+          <div [ngClass]="{'active-indicator' : isShowMenuSidebar}"></div>
+          <fa-icon icon="file-import"></fa-icon><span class="menu-text">แบบประเมิน</span>
+        </a></li>
+
+      <li *ngIf="userData.role_code == 'RO1'"><a routerLink="/admin/user" routerLinkActive="active"
+          ariaCurrentWhenActive="page" class="menu-link">
+          <div [ngClass]="{'active-indicator' : isShowMenuSidebar}"></div>
+          <fa-icon icon="user" class="pl-1"></fa-icon><span class="menu-text">ผู้ใช้งาน</span>
+        </a></li>
+
+      <li><a routerLink="/admin/compare" routerLinkActive="active" ariaCurrentWhenActive="page" class="menu-link">
+          <div [ngClass]="{'active-indicator' : isShowMenuSidebar}"></div>
+          <fa-icon icon="chart-line"></fa-icon><span class="menu-text">เปรียบเทียบ</span>
+        </a></li>
+    </ul>
+  </article>
+</nav>

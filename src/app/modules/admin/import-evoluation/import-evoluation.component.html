@@ -1,0 +1,101 @@
+<filter-org-unit #filterOrg [orgUnitCodes]="orgUnitCodes" (filterChange)="onFilterChange($event)"></filter-org-unit>
+
+<div class="mt-4">
+  <button class="btn-import mr-2" (click)="importDialog()"><fa-icon icon="upload" class="mr-2"></fa-icon>เพิ่มการประเมิน</button>
+  <button class="btn-import" (click)="export()"><fa-icon icon="download" class="mr-2"></fa-icon> Export</button>
+</div>
+
+<section>
+  <table matSort class="org-unit-master-table table-auto">
+    <thead>
+      <tr>
+        <th rowspan="2" class="m-w-[50px] w-[50px] text-center">#</th>
+        <th rowspan="2" class="m-w-[100px] w-[100px] text-center">รหัสหน่วยงาน</th>
+        <th rowspan="2" class="m-w-[200px] w-[200px] text-center">หน่วยงาน</th>
+        <th colspan="5" class="text-center">คะแนน</th>
+        <th colspan="5" class="text-center">จำนวนคนประเมิน</th>
+        <th rowspan="2" class="text-center">ปีประเมิน</th>
+      </tr>
+      <tr>
+        <th class="text-center">งานบริการสถานีตำรวจ</th>
+        <th class="text-center">งานสืบสวนสอบสวน</th>
+        <th class="text-center">งานป้องกันปราบปรามอาชญากรรม</th>
+        <th class="text-center">งานจราจร</th>
+        <th class="text-center">ความพึงพอใจ</th>
+
+        <th class="text-center">งานบริการสถานีตำรวจ</th>
+        <th class="text-center">งานสืบสวนสอบสวน</th>
+        <th class="text-center">งานป้องกันปราบปรามอาชญากรรม</th>
+        <th class="text-center">งานจราจร</th>
+        <th class="text-center">ความพึงพอใจ</th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="loadData">
+      <tr>
+        <td colspan="14"><m-loader></m-loader></td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="sortedData.length == 0 && !loadData">
+      <tr>
+        <td colspan="14">ไม่มีข้อมูล</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="sortedData.length > 0 && !loadData">
+      <ng-container *ngFor="let item of sortedData;">
+
+        <tr [ngClass]="{'head-bch' : item.org_unit_role == 'RO2' && !item.is_evaluation,
+          'head-bk' : item.org_unit_role == 'RO3' && !item.is_evaluation,
+          'head-kk' : item.org_unit_role == 'RO4' && !item.is_evaluation}">
+
+          <td>
+            <div class="actions" *ngIf="item.is_evaluation">
+              <button class="btn-delete" (click)="deleteEvloation(item)"><fa-icon icon="trash"></fa-icon></button>
+            </div>
+          </td>
+
+          <ng-container *ngIf="!item.is_evaluation">
+            <td colspan="2" class="text-center">{{item.org_unit_name}}</td>
+          </ng-container>
+
+          <ng-container *ngIf="item.is_evaluation">
+            <td>{{item.org_unit_code}}</td>
+            <td>{{item.org_unit_name}}</td>
+          </ng-container>
+
+          <td class="text-right">{{item.service_work_score}}</td>
+          <td class="text-right">{{item.investigative_work_score}}</td>
+          <td class="text-right">{{item.crime_prevention_work_score}}</td>
+          <td class="text-right">{{item.traffic_work_score}}</td>
+          <td class="text-right">{{item.satisfaction_score}}</td>
+
+          <td class="text-right">{{item.service_work_count | number:'1.0-2'}}</td>
+          <td class="text-right">{{item.investigative_work_count | number:'1.0-2'}}</td>
+          <td class="text-right">{{item.crime_prevention_work_count | number:'1.0-2'}}</td>
+          <td class="text-right">{{item.traffic_work_count | number:'1.0-2'}}</td>
+          <td class="text-right">{{item.satisfaction_count | number:'1.0-2'}}</td>
+
+          <td class="text-right">{{item.evaluation_year }}</td>
+        </tr>
+
+      </ng-container>
+    </tbody>
+
+  </table>
+
+  <article>
+    <m-pagination [items]="data" (changePage)="onChangePage($event)" [pageIndex]="pageIndex"></m-pagination>
+  </article>
+</section>
+
+<m-dialog [width]="'60%'" [(isShowDialog)]="isShowDialog">
+  <ng-template #dialogHeader>
+    <h1>เพิ่มการประเมิน</h1>
+  </ng-template>
+
+  <ng-template #dialogContent>
+    <import-evoluation-dialog (closeDialog)="oncloseDialog()" (submitDialog)="onsubmitDialog()"></import-evoluation-dialog>
+  </ng-template>
+</m-dialog>

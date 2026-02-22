@@ -1,0 +1,73 @@
+<ng-container *ngIf="!loader && !!data then dataBox else loaderBox"></ng-container>
+
+<ng-template #loaderBox>
+  <article class="grid grid-col-1 md:grid-cols-2 gap-4">
+    <m-loader [theme]="{ width: '100%', 'border-radius': '15px', height: '200px' }"></m-loader>
+    <m-loader [theme]="{ width: '100%', 'border-radius': '15px', height: '200px' }"></m-loader>
+    <m-loader [theme]="{ width: '100%', 'border-radius': '15px', height: '200px' }"></m-loader>
+    <m-loader [theme]="{ width: '100%', 'border-radius': '15px', height: '200px' }"></m-loader>
+  </article>
+</ng-template>
+
+<ng-template #dataBox>
+  <div class="grid grid-col-1 md:grid-cols-2 gap-4">
+    <evaluators-amount-widget #evAmo [title]="'จำนวนผู้ตอบแบบสอบถาม สตม.'"></evaluators-amount-widget>
+    <evaluation-total-widget #evTo></evaluation-total-widget>
+
+    <div class="average-score-content">
+      <p>คะแนนความพึงพอใจเฉลี่ย</p>
+      <p>{{averageScore | number:'1.0-2'}}</p>
+    </div>
+
+    <score-gauge-chart-widget #scoGauge [comName]="'ImmigrationBureau'"></score-gauge-chart-widget>
+  </div>
+</ng-template>
+
+
+
+<div class="mt-4">
+  <filter-org-unit [orgUnitCodes]="orgUnitCodes" (filterChange)="onFilterChange($event)"></filter-org-unit>
+</div>
+
+
+
+<article class="pie-filter-content">
+
+  <m-loader *ngIf="loaderFilter" class="w-full"
+    [theme]="{ width: '100%', 'border-radius': '15px', height: '200px' }"></m-loader>
+
+
+  <div *ngIf="!loaderFilter && !!filterData?.bch_org_unit" class="pie">
+    <p>{{filter.bch_org_unit_name}}</p>
+    <evaluation-total-widget [categories]="categoriesEvTo" [series]="seriesBCH" [legend]="{show: false}"
+      [loader]="false"></evaluation-total-widget>
+    <span>ผู้ตอบแบบประเมินระดับ บช.</span>
+  </div>
+
+  <div *ngIf="!loaderFilter && !!filterData?.bk_org_unit" class="pie">
+    <p>{{filter.bk_org_unit_name}}</p>
+    <evaluation-total-widget [categories]="categoriesEvTo" [series]="seriesBK" [legend]="{show: false}"
+      [loader]="false"></evaluation-total-widget>
+    <span>ผู้ตอบแบบประเมินระดับ บก.</span>
+  </div>
+
+
+  <div *ngIf="!loaderFilter && !!filterData?.kk_org_unit" class="pie">
+    <p>{{filter.kk_org_unit_name}}</p>
+    <evaluation-total-widget [categories]="categoriesEvTo" [series]="seriesKK" [legend]="{show: false}"
+      [loader]="false"></evaluation-total-widget>
+    <span>ผู้ตอบแบบประเมินระดับ กก.</span>
+  </div>
+
+  <div *ngIf="!loaderFilter && !!filterData?.org_unit" class="pie">
+    <p>{{filter.org_unit_name}}</p>
+    <evaluation-total-widget [categories]="categoriesEvTo" [series]="seriesOrg" [legend]="{show: false}"
+      [loader]="false"></evaluation-total-widget>
+    <span>ผู้ตอบแบบประเมินระดับหน่วยงาน</span>
+  </div>
+
+</article>
+
+<article *ngIf="!loaderFilter && filterData?.org_unit_evoluation_item_list.length > 0">
+  <org-unit-score-table [data]="filterData.org_unit_evoluation_item_list" [filter]="filter"></org-unit-score-table>
+</article>

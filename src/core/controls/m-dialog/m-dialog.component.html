@@ -1,0 +1,22 @@
+<div *ngIf="isShowDialog" class="backdrop" (click)="closeDialog()"></div>
+
+<main *ngIf="isShowDialog" class="dialog-wrapper">
+  <article class="dialog" [style.width]="width">
+    <section class="dialog-header">
+        <div class="w-full">
+          <ng-container *ngTemplateOutlet="mDialogHeader"></ng-container>
+        </div>
+
+        <button class="btn-close" (click)="closeDialog()"><fa-icon icon="xmark"></fa-icon></button>
+    </section>
+
+    <section class="dialog-content">
+      <ng-container *ngTemplateOutlet="mDialogContent"></ng-container>
+    </section>
+
+    <section class="dialog-action">
+      <ng-container *ngTemplateOutlet="mDialogAction"></ng-container>
+    </section>
+  </article>
+
+</main>

@@ -1,0 +1,79 @@
+<ng-container *ngIf="loader then loaderBox else dataBox">
+
+</ng-container>
+
+<ng-template #loaderBox>
+  <section class="org-unit-form">
+    <article class="grid grid-cols-3 gap-4">
+      <m-loader [title]="'รหัสหน่วยงาน'"></m-loader>
+      <m-loader [title]="'ชื่อหน่วยงาน'"></m-loader>
+      <m-loader [title]="'ระดับหน่วยงาน'"></m-loader>
+      <m-loader [title]="'ระดับกองบัญชาการ'"></m-loader>
+      <m-loader [title]="'ระดับกองบัญชาการ'"></m-loader>
+      <m-loader [title]="'ระดับกองกำกับการ'"></m-loader>
+    </article>
+  </section>
+</ng-template>
+
+<ng-template #dataBox>
+  <section class="org-unit-form">
+    <div class="flex">
+      <m-radio-form [name]="'radio-evaluation'" [displayValue]="true" [displayText]="'ประเมิน'"
+        [control]="f['is_evaluation']" (inputChange)="isEvaluationChange($event)" [disabled]="data.id != 0"></m-radio-form>
+
+      <m-radio-form [name]="'radio-evaluation'" [displayValue]="false" [displayText]="'ไม่ประเมิน'"
+        [control]="f['is_evaluation']" (inputChange)="isEvaluationChange($event)" [disabled]="data.id != 0"></m-radio-form>
+    </div>
+    <article class="grid grid-cols-3 gap-4">
+      <m-input-form [title]="'รหัสหน่วยงาน'" [control]="f['org_unit_code']" [maxLength]="100"
+        [disabled]="!f['is_evaluation'].value || data.id != 0"></m-input-form>
+      <m-input-form [title]="'ชื่อหน่วยงาน'" [control]="f['org_unit_name']" [maxLength]="200"></m-input-form>
+      <m-dropdowm-form [title]="'ระดับหน่วยงาน'" [control]="f['org_unit_role']" [option]="roleOption"
+        [disabled]="roleOption.length == 0 || data.id != 0" [serverSide]="false" (selectedChange)="onOrgUnitRoleSelect($event);"></m-dropdowm-form>
+    </article>
+
+    <div class="driven"></div>
+    <p class="text-[1.5rem] mt-4">สายบังคับบัญชาหน่วยงาน</p>
+    <article class="grid grid-cols-3 gap-4">
+      <m-dropdowm-form [title]="'ระดับกองบัญชาการ'" [control]="f['bch_org_unit']" [option]="BCHOption"
+        [disabled]="BCHOption.length == 0 || data.id != 0 || f['org_unit_role'].value == 'RO2' || !f['org_unit_role'].value" (searchChange)="getBCHOption($event)"
+        (selectedChange)="BCHSelectChange($event)"></m-dropdowm-form>
+
+      <m-dropdowm-form [title]="'ระดับกองบังคับการ'" [control]="f['bk_org_unit']" [option]="BKOption"
+       [disabled]="BKOption.length == 0 || data.id != 0 || f['org_unit_role'].value == 'RO2' || f['org_unit_role'].value == 'RO3' || !f['org_unit_role'].value"
+        (searchChange)="getBKOption($event)" (selectedChange)="BKSelectChange($event)"></m-dropdowm-form>
+
+      <m-dropdowm-form [title]="'ระดับกองกำกับการ'" [control]="f['kk_org_unit']" [option]="KKOption"
+        [disabled]="KKOption.length == 0 || data.id != 0 || f['org_unit_role'].value == 'RO2' || f['org_unit_role'].value == 'RO3' || f['org_unit_role'].value == 'RO4' || !f['org_unit_role'].value" (searchChange)="getKKOption($event)"
+        (selectedChange)="KKSelectChange($event)"></m-dropdowm-form>
+    </article>
+
+
+    <article *ngIf="f['is_evaluation'].value">
+      <p class="text-[1.5rem] mt-4">รายละเอียดการประเมิน</p>
+
+      <div class="flex">
+        <m-radio-form [name]="'radio-evaluation-type'" [displayValue]="'Service'" [displayText]="'ประเมินงาน 4 ประเภท'"
+          [control]="fEvo['evaluation_type']"></m-radio-form>
+
+        <m-radio-form [name]="'radio-evaluation-type'" [displayValue]="'Satisfaction'"
+          [displayText]="'ประเมินความพึงพอใจ'" [control]="fEvo['evaluation_type']"></m-radio-form>
+      </div>
+
+      <div class="grid grid-cols-4 gap-2">
+        <m-numeric-form [title]="'งานบริการสถานีตำรวจ'" [control]="fEvo['service_work_total']"></m-numeric-form>
+        <m-numeric-form [title]="'งานสืบสวนสอบสวน'" [control]="fEvo['investigative_work_total']"></m-numeric-form>
+        <m-numeric-form [title]="'งานป้องกันปราบปรามอาชญากรรม'"
+          [control]="fEvo['crime_prevention_work_total']"></m-numeric-form>
+        <m-numeric-form [title]="'งานจราจร'" [control]="fEvo['traffic_work_total']"></m-numeric-form>
+        <m-numeric-form [title]="'ความพึงพอใจ'" [control]="fEvo['satisfaction_total']"></m-numeric-form>
+      </div>
+    </article>
+
+    <article class="flex justify-end gap-3 mt-4">
+      <button class="btn-cancel" (click)="cancel()">ยกเลิก</button>
+      <button class="btn-save" (click)="saveData()">บันทึก</button>
+    </article>
+
+  </section>
+</ng-template>

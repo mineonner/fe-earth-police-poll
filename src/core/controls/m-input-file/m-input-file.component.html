@@ -1,0 +1,99 @@
+<ng-container *ngIf="mode == 'view'; then viewMode; else editMode"></ng-container>
+
+<ng-template #viewMode>
+  <div class="table-content mt-3">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="w-[50px] max-w-[50px] text-center">#</th>
+          <th class="w-[50px] min-w-[50px] text-center"></th>
+          <th class="min-w-[150px] text-center">ชื่อไฟล์</th>
+          <th class="w-[150px] max-w-[150px]  text-center">ขนาดไฟล์</th>
+        </tr>
+      </thead>
+
+      <tbody *ngIf="files.length == 0">
+        <tr>
+          <td colspan="4" class="text-center p-3">
+            ไม่มีไฟล์
+          </td>
+        </tr>
+      </tbody>
+
+      <tbody *ngIf="files.length > 0">
+        <tr *ngFor="let file of files; let index = index; trackById">
+          <td class="p-3 text-center">{{ index + 1 }}</td>
+          <td class="p-3 text-center"><a class="file-link" [href]="file.path" download><fa-icon
+                icon="download"></fa-icon></a></td>
+          <td class="p-3"><a class="file-link" [href]="file.path" download><fa-icon icon="image"
+                *ngIf="checkFileType(file, imageTypeFile)"></fa-icon>
+              <fa-icon icon="file" *ngIf="checkFileType(file, documentTypeFile)"></fa-icon>
+              <fa-icon icon="file-video" *ngIf="checkFileType(file, videoTypeFile)"></fa-icon>
+
+              <span class="ml-2">{{file.name }}</span></a></td>
+          <td class="p-3">{{ file.size | mFileSize }}</td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+</ng-template>
+
+<ng-template #editMode>
+  <div class="table-content mt-3">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="w-[50px] max-w-[50px]"></th>
+          <th class="w-[50px] max-w-[50px] text-center">#</th>
+          <th class="min-w-[150px] text-center">ชื่อไฟล์</th>
+          <th class="w-[150px] max-w-[150px]  text-center">ขนาดไฟล์</th>
+        </tr>
+      </thead>
+
+      <tbody *ngIf="files.length == 0">
+        <tr>
+          <td colspan="4" class="text-center p-3">
+            ไม่มีไฟล์
+          </td>
+        </tr>
+      </tbody>
+
+      <tbody *ngIf="files.length > 0">
+        <tr *ngFor="let file of files; let index = index; trackById">
+          <td class="p-3 text-center">
+            <button (click)="removeFile(file, index)" class="btn-delete">
+              <fa-icon icon="trash-can" class="icon-delete"></fa-icon>
+            </button>
+          </td>
+          <td class="p-3 text-center">{{ index + 1 }}</td>
+
+          <td class="p-3">
+            <fa-icon icon="image" *ngIf="checkFileType(file, imageTypeFile)"></fa-icon>
+            <fa-icon icon="file" *ngIf="checkFileType(file, documentTypeFile)"></fa-icon>
+            <fa-icon icon="file-video" *ngIf="checkFileType(file, videoTypeFile)"></fa-icon>
+
+            <span class="ml-2">{{file.name }}</span>
+          </td>
+          <td class="p-3">{{ file.size | mFileSize }}</td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+
+  <div class="mt-3">
+    <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)">
+      <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+
+        <div class="upload-file">
+          <label>วางไฟล์ที่นี่</label>
+          <span> หรือ </span>
+          <button type="button" (click)="openFileSelector()">เลือกไฟล์</button>
+        </div>
+
+      </ng-template>
+    </ngx-file-drop>
+  </div>
+
+</ng-template>

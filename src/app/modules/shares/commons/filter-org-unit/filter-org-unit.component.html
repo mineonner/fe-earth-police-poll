@@ -1,0 +1,28 @@
+<article class="grid grid-col-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+  <ng-container *ngIf="loader then loaderData else dataBox"></ng-container>
+</article>
+
+
+
+<ng-template #loaderData>
+  <m-loader [title]="'กองบัญชาการ'"></m-loader>
+  <m-loader [title]="'กองบังคับการ'"></m-loader>
+  <m-loader [title]="'กองกำกับการ'"></m-loader>
+  <m-loader [title]="'หน่วยงาน'"></m-loader>
+</ng-template>
+
+<ng-template #dataBox>
+
+  <m-dropdown [title]="'กองบัญชาการ'" [(value)]="filter.bch_org_unit" [option]="BCHOption" (searchChange)="getBCHOption($event)" [disabled]="BCHOption.length == 0"
+    (selectedChange)="BCHValueChange($event)"></m-dropdown>
+
+  <m-dropdown [title]="'กองบังคับการ'" [(value)]="filter.bk_org_unit" [option]="BKOption" (searchChange)="getBKOption($event)" [disabled]="BKOption.length == 0"
+    (selectedChange)="BKValueChange($event)"></m-dropdown>
+
+  <m-dropdown [title]="'กองกำกับการ'" [(value)]="filter.kk_org_unit" [option]="KKOption" (searchChange)="getKKOption($event)" [disabled]="KKOption.length == 0"
+    (selectedChange)="KKValueChange($event)"></m-dropdown>
+
+  <m-dropdown [title]="'หน่วยงาน'" [(value)]="filter.org_unit" [option]="ORGOption" (searchChange)="getORGOption($event)" [disabled]="ORGOption.length == 0"
+    (selectedChange)="ORGValueChange($event)"></m-dropdown>
+
+</ng-template>

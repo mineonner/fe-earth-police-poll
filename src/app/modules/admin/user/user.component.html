@@ -1,0 +1,72 @@
+<filter-org-unit #filterOrg (filterChange)="onFilterChange($event)"></filter-org-unit>
+
+<div class="mt-4">
+  <button class="btn-add" (click)="addUser()"><fa-icon icon="plus" class="mr-2"></fa-icon>เพิ่มผู้ใช้งาน</button>
+</div>
+
+<section>
+  <table matSort class="org-unit-master-table table-auto">
+    <thead>
+      <tr>
+        <th class="m-w-[80px] w-[80px] text-center">#</th>
+        <th>ชื่อผู้ใช้งาน</th>
+        <th>ระดับผู้ใช้</th>
+        <th>หน่วยงาน</th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="loader">
+      <tr>
+        <td colspan="4"><m-loader></m-loader></td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="sortedData.length == 0 && !loader">
+      <tr>
+        <td colspan="4">ไม่มีข้อมูล</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="sortedData.length > 0 && !loader">
+      <ng-container *ngFor="let item of sortedData;">
+        <tr>
+          <td>
+            <div class="actions">
+              <button class="btn-edit" (click)="editUser(item)"><fa-icon icon="pencil"></fa-icon></button>
+              <button class="btn-delete" (click)="deleteUser(item)"><fa-icon icon="trash"></fa-icon></button>
+            </div>
+          </td>
+
+          <td>
+            {{item.user}}
+          </td>
+
+          <td>
+            {{item.role_name}}
+          </td>
+
+          <td>
+            {{item.org_unit_name}}
+          </td>
+
+        </tr>
+      </ng-container>
+    </tbody>
+
+  </table>
+
+  <article>
+    <m-pagination [items]="userDatas" (changePage)="onChangePage($event)" [pageIndex]="pageIndex"></m-pagination>
+  </article>
+
+</section>
+
+<m-dialog [width]="'60%'" [(isShowDialog)]="isShowDialog">
+  <ng-template #dialogHeader>
+    <h1>เพิ่มผู้ใช้งาน</h1>
+  </ng-template>
+
+  <ng-template #dialogContent>
+    <user-dialog [data]="dataDialog" (closeDialog)="onCloseDialog()" (submitDialog)="onSubmitDialog()"></user-dialog>
+  </ng-template>
+</m-dialog>

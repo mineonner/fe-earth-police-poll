@@ -1,0 +1,37 @@
+.score-gauge-content {
+
+  // @apply grid grid-cols-1 gap-2;
+
+  .score-gauge {
+    margin: auto;
+    width: 70%;
+    height: 250px
+  }
+
+  .score-text {
+    width: 70%;
+    border-radius: 35px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -20px;
+    font-size: 2rem;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    .bad {
+      background-color: #cf4547;
+      padding: 0.5rem;
+    }
+
+    .good {
+      background-color: #66dd66;
+      padding: 0.5rem;
+    }
+
+    .normal {
+      background-color:  #ffb000;
+      padding: 0.5rem;
+    }
+  }
+}

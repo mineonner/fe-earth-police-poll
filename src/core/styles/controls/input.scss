@@ -1,0 +1,27 @@
+m-input,
+m-input-form {
+  width: 100% !important;
+}
+
+input {
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: var(--second-color);
+  font-size: var(--font-size-default);
+  font-weight: 400;
+  padding: .5rem .75rem;
+}
+
+::ng-deep {
+
+  body.tablet,
+  body.mobile {
+    .form-control {
+      input {
+        padding: .25rem .5rem;
+        font-size: 0.8rem;
+      }
+    }
+  }
+}

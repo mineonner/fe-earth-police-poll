@@ -1,0 +1,39 @@
+.form-control{
+  flex-direction: row;
+  align-items: center;
+  label{
+    display: flex;
+    margin-bottom: unset;
+    position: relative;
+    align-items: center;
+  }
+}
+
+::ng-deep{
+  .mat-mdc-checkbox{
+    .mdc-checkbox__background{
+      border-color : var(--second-color) !important;
+      background-color: #ffffff !important;
+    }
+
+    .mdc-label{
+      font-size: var(--font-size-default);
+      font-weight: var(--font-weight-default);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+  .mat-mdc-checkbox.mat-mdc-checkbox-checked{
+    .mdc-checkbox__background{
+      border-color : var(--second-color) !important;
+      background-color: var(--second-color) !important;
+    }
+  }
+
+  .mat-mdc-checkbox.mat-mdc-checkbox-disabled{
+    .mdc-checkbox__background{
+      background-color: #d2cecd !important;
+    }
+  }
+}

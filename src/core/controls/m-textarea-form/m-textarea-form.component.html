@@ -1,0 +1,5 @@
+<div  class="form-control" [ngClass]="className">
+  <label *ngIf="title">{{title}}<span *ngIf="isRequired" class="required">*</span></label>
+  <textarea  [formControl]="f" [maxLength]="maxLength"></textarea>
+  <span class="input-length">{{ !!f.value ? f.value?.length : 0 }} / {{maxLength}}</span>
+</div>

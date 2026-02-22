@@ -1,0 +1,15 @@
+<section class="form-control">
+  <label *ngIf="title">{{title}}<span *ngIf="isRequired" class="required">*</span></label>
+  <mat-radio-group [name]="name" [formControl]="f">
+    <mat-radio-button *ngFor="let op of options; trackByIndex" [value]="fields ? op[fields.value] : op"
+      (change)="onInputChange($event)">{{fields ? op[fields.text] : op}}</mat-radio-button>
+
+      <div class="input-radio">
+        <mat-radio-button *ngIf="options.length == 0" [value]="displayValue" (change)="onInputChange($event)"></mat-radio-button>
+        <label>{{displayText}} <ng-container *ngTemplateOutlet="dTitleAddOn"></ng-container></label>
+      </div>
+
+  </mat-radio-group>
+</section>
+
+

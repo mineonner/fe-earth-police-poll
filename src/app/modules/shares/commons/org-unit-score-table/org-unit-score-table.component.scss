@@ -1,0 +1,61 @@
+.org-unit-score-table {
+  thead {
+    background-color: #bebebe;
+
+    tr th {
+      padding: 0.5rem 0.5rem 0.5rem 1rem;
+      border: 1px solid #000000;
+
+      ::ng-deep .mat-sort-header-container {
+        justify-content: center;
+      }
+    }
+  }
+
+  tbody {
+    tr td {
+      padding: 0.5rem;
+      border: 1px solid #000000;
+    }
+
+    .head-bch {
+      background-color: #cf772e;
+    }
+
+    .head-bk {
+      background-color: #bde451;
+    }
+
+    .head-kk {
+      background-color: #3eca9b;
+    }
+
+
+    .bad {
+      background-color: #cf4547;
+
+    }
+
+    .nomal {
+      background-color: #ffb000;
+
+    }
+
+    .good {
+      background-color: #66dd66;
+
+    }
+
+  }
+}
+
+.btn-export {
+  background-color: #20ad2c;
+  padding: 0.5rem;
+  border-radius: 10px;
+  color: #ffffff;
+}
+
+.btn-export:hover {
+  box-shadow: 0px 5px 11px 0px rgba(110, 110, 110, 0.75);
+}

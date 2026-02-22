@@ -1,0 +1,14 @@
+<ng-container *ngIf="loader then loaderBox else dataBox"></ng-container>
+
+  <ng-template #loaderBox>
+    <m-loader [theme]="{ width: '100%', 'border-radius': '15px', height: '200px' }"></m-loader>
+  </ng-template>
+
+  <ng-template #dataBox>
+    <div>
+      <apx-chart #chart [series]="chartOptions.series" [chart]="chartOptions.chart"
+        [dataLabels]="chartOptions.dataLabels" [plotOptions]="chartOptions.plotOptions"
+        [responsive]="chartOptions.responsive" [xaxis]="chartOptions.xaxis" [legend]="chartOptions.legend"
+        [fill]="chartOptions.fill" [noData]="chartOptions.noData" [colors]="chartOptions.colors" [noData]="chartOptions.noData"></apx-chart>
+    </div>
+  </ng-template>

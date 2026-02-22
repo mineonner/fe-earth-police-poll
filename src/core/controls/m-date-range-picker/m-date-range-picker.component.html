@@ -1,0 +1,13 @@
+<div class="form-control">
+  <label *ngIf="title">{{title}}<span *ngIf="isRequired" class="required">*</span></label>
+  <mat-form-field>
+    <mat-date-range-input [rangePicker]="picker" (click)="picker.open()">
+      <input matStartDate [placeholder]="placeholderStart" [readonly]="true" (dateInput)="setDateStart($event)"
+        [(ngModel)]="startClone">
+      <input matEndDate [placeholder]="placeholderEnd" [readonly]="true" (dateInput)="setDateEnd($event)"
+        [(ngModel)]="endClone">
+    </mat-date-range-input>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+  </mat-form-field>
+</div>

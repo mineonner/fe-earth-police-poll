@@ -1,0 +1,85 @@
+<article class="flex justify-between gap-3 " *ngIf="!isLoaderImport">
+  <input type="file" class="file-upload"
+    accept="text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+    (change)="dropfile($event)">
+
+    <a class="btn-cancel" href="/assets/files/แบบประเมิน.xlsx" download>Template</a>
+</article>
+
+
+
+<section>
+  <table matSort class="org-unit-master-table table-auto">
+    <thead>
+      <tr>
+        <th rowspan="2" class="text-center">รหัสหน่วยงาน</th>
+        <th colspan="5" class="text-center">คะแนน</th>
+        <th colspan="5" class="text-center">จำนวนคนประเมิน</th>
+        <th rowspan="2" class="text-center">ปีประเมิน</th>
+      </tr>
+      <tr>
+        <th class="text-center">งานบริการสถานีตำรวจ</th>
+        <th class="text-center">งานสืบสวนสอบสวน</th>
+        <th class="text-center">งานป้องกันปราบปรามอาชญากรรม</th>
+        <th class="text-center">งานจราจร</th>
+        <th class="text-center">ความพึงพอใจ</th>
+
+        <th class="text-center">งานบริการสถานีตำรวจ</th>
+        <th class="text-center">งานสืบสวนสอบสวน</th>
+        <th class="text-center">งานป้องกันปราบปรามอาชญากรรม</th>
+        <th class="text-center">งานจราจร</th>
+        <th class="text-center">ความพึงพอใจ</th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="loadData">
+      <tr>
+        <td colspan="13"><m-loader></m-loader></td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="sortedData.length == 0 && !loadData">
+      <tr>
+        <td colspan="13">ไม่มีข้อมูล</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="sortedData.length > 0 && !loadData">
+      <ng-container *ngFor="let item of sortedData;">
+
+        <tr>
+          <td>{{item.org_unit_code}}</td>
+
+          <td class="text-right">{{item.service_work_score}}</td>
+          <td class="text-right">{{item.investigative_work_score}}</td>
+          <td class="text-right">{{item.crime_prevention_work_score}}</td>
+          <td class="text-right">{{item.traffic_work_score}}</td>
+          <td class="text-right">{{item.satisfaction_score}}</td>
+
+          <td class="text-right">{{item.service_work_count | number:'1.0-2'}}</td>
+          <td class="text-right">{{item.investigative_work_count | number:'1.0-2'}}</td>
+          <td class="text-right">{{item.crime_prevention_work_count | number:'1.0-2'}}</td>
+          <td class="text-right">{{item.traffic_work_count | number:'1.0-2'}}</td>
+          <td class="text-right">{{item.satisfaction_count | number:'1.0-2'}}</td>
+
+          <td class="text-right">{{item.evaluation_year }}</td>
+        </tr>
+
+      </ng-container>
+    </tbody>
+
+  </table>
+
+  <article>
+    <m-pagination [items]="dataUpload" (changePage)="onChangePage($event)" [pageIndex]="pageIndex"></m-pagination>
+  </article>
+</section>
+
+<article class="flex justify-end gap-3 mt-4" *ngIf="!isLoaderImport">
+  <button class="btn-cancel" (click)="cancel()">ยกเลิก</button>
+  <button class="btn-save" *ngIf="dataUpload.length > 0" (click)="importData()">เพิ่มข้อมูล</button>
+</article>
+
+<article *ngIf="isLoaderImport" class="w-full">
+  <m-loader></m-loader>
+</article>

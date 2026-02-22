@@ -1,0 +1,71 @@
+.backdrop {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  display: block;
+  z-index: 999;
+  visibility: visible;
+  background-color: #e6e2e2;
+  opacity: 0.7;
+  transition-duration: 400ms;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-property: background-color, visibility;
+}
+
+.dialog-wrapper {
+  // justify-content: center;
+  // align-items: center;
+  // display: flex;
+  // position: absolute;
+  // pointer-events: none;
+  // top: 0;
+  // left: 0;
+  // height: 100%;
+  // width: 100%;
+  // z-index: 1000;
+
+  display: block;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+  .dialog {
+
+    background-color: #fefefe;
+    margin: 10% auto;
+    border-radius: 5px;
+    overflow: hidden;
+
+    .dialog-header {
+      display: flex;
+      padding: 1rem;
+      background-color: var(--primary-color);
+
+      .btn-close {
+        align-self: start;
+        padding: .25rem 0.5rem;
+        box-shadow: inset 0 0 0 100px #f0f0f0;
+        border-radius: 8px;
+        color: var(--error-color);
+      }
+
+      .btn-close:hover{
+        box-shadow: inset 0 0 0 100px var(--error-color);
+        color: #f0f0f0;
+      }
+    }
+
+    .dialog-content{
+      padding: 1rem;
+    }
+
+    .dialog-action{
+      padding: 1rem;
+    }
+  }
+}

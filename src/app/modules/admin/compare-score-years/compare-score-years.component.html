@@ -1,0 +1,24 @@
+<section class="mt-4">
+  <article>
+    <filter-org-unit #filterOrg (filterChange)="onFilterChange($event)"></filter-org-unit>
+  </article>
+
+  <!-- <article class="mt-4" *ngIf="isShowLineChart">
+    <chart-widget [chartOptions]="chartLineOptions"></chart-widget>
+  </article> -->
+
+  <article class="mt-4" *ngIf="isShowLineChart">
+    <div id="chart">
+      <apx-chart [series]="chartLineOptions.series" [chart]="chartLineOptions.chart" [xaxis]="chartLineOptions.xaxis" [yaxis]="chartLineOptions.yaxis"
+        [dataLabels]="chartLineOptions.dataLabels" [grid]="chartLineOptions.grid" [stroke]="chartLineOptions.stroke"
+        [title]="chartLineOptions.title" [colors]="chartLineOptions.colors" [markers]="chartLineOptions.markers" [dataLabels]="chartLineOptions.dataLabels"
+        [legend]="chartLineOptions.legend"></apx-chart>
+    </div>
+  </article>
+
+
+  <article class="mt-4" *ngIf="isShowColumnChart">
+    <chart-widget [chartOptions]="chartColumnOptions"></chart-widget>
+  </article>
+
+</section>

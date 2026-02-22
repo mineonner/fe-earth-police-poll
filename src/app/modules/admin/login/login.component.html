@@ -1,0 +1,15 @@
+<article class="warp-login">
+  <section class="login-form">
+    <span class="login-title">Login to continue</span>
+    <m-input-form [title]="'Username'" [control]="f['user']"></m-input-form>
+    <m-input-form [title]="'Password'" [inputType]="'password'" [control]="f['password']"></m-input-form>
+
+    <!-- <p class="reset-button" (click)="showResetPassword()">reset password?</p> -->
+
+    <button class="login-button" (click)="login()"><m-spinner *ngIf="sentLoader"></m-spinner>LOGIN</button>
+  </section>
+
+  <section class="login-image">
+
+  </section>
+</article>

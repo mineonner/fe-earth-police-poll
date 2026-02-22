@@ -1,0 +1,20 @@
+<div class="search-content" *ngIf="mode != 'view'">
+  <div class="form-control my-3 w-full">
+    <label *ngIf="title">{{title}}<span *ngIf="isRequired" class="required">*</span></label>
+    <div class="search-map">
+      <input id="pac-input" class="w-full" type="text" placeholder="ค้าหาสถานที่" />
+      <button id="current-posittion" (click)="setCurrentPosition($event)"><fa-icon icon="location-dot"
+          class="mr-3"></fa-icon>ตำแหน่งปัจจุบัน</button>
+    </div>
+
+  </div>
+
+
+</div>
+
+
+
+<google-map id="google-map" #map height="400px" width="100%" [center]="center" [options]="options"
+  (mapClick)="addMarker($event)">
+  <map-marker [position]="markerPosition" [options]="markerOptions"></map-marker>
+</google-map>

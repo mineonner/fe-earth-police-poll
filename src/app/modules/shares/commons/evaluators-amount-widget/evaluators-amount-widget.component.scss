@@ -1,0 +1,32 @@
+.evaluators-amount-widget {
+  width: 100%;
+  text-align: center;
+  color: #060b7e;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .title {
+    font-size: 2.5rem;
+    font-weight: 500;
+  }
+
+  .evaluators-count {
+    font-size: 5rem;
+
+    span {
+      font-size: 2.5rem;
+    }
+  }
+
+  .evaluators-total {
+    font-size: 2rem;
+  }
+
+  .evluation-date {
+    font-size: 1rem;
+    color: black;
+  }
+}

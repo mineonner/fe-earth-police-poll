@@ -1,0 +1,4 @@
+<div  class="form-control">
+  <mat-checkbox [formControl]="f" (change)="onInputChange($event)"></mat-checkbox>
+  <label>{{title}}<ng-container *ngTemplateOutlet="dTitleAddOn"></ng-container></label>
+</div>

@@ -1,0 +1,39 @@
+@import '../../styles/controls/main.scss';
+@import '../../styles/controls/input.scss';
+
+.search-content{
+  .search-map{
+    display: flex;
+    gap: 1rem;
+  }
+}
+
+#current-posittion{
+  padding: 0.5rem 0.75rem;
+  background-color: var(--second-color);
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #fff;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+#current-posittion:hover{
+  background-color: var(--primary-color);;
+}
+
+::ng-deep {
+  body.tablet, body.mobile {
+    #current-posittion{
+      padding: 0.25rem 0.5rem;
+    }
+  }
+
+  body.mobile{
+    .search-content{
+      .search-map{
+        flex-direction: column;
+      }
+    }
+  }
+}

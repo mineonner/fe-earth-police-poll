@@ -1,0 +1,14 @@
+<div class="form-control">
+  <label *ngIf="title">{{title}}<span *ngIf="isRequired" class="required">*</span></label>
+  <mat-form-field>
+    <mat-select [formControl]="valueObject" [placeholder]="option.length > 0 ? 'กรุณาเลือก' : 'ไม่มีข้อมูล'" [disabled]="disabled" #singleSelect (valueChange)="onValueChange($event)">
+      <mat-option>
+        <ngx-mat-select-search [formControl]="bankFilterCtrl" [placeholderLabel]="'ค้าหา'" noEntriesFoundLabel="ไม่มีข้อมูล"></ngx-mat-select-search>
+      </mat-option>
+
+      <mat-option *ngFor="let bank of filteredBanks | async" [value]="bank">
+        {{bank.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

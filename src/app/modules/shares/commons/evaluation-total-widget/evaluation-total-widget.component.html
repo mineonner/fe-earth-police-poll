@@ -1,0 +1,13 @@
+<ng-container *ngIf="loader then loaderBox else dataBox"></ng-container>
+
+<ng-template #loaderBox>
+  <m-loader [theme]="{ width: '100%', 'border-radius': '15px', height: '200px' }"></m-loader>
+</ng-template>
+
+<ng-template #dataBox>
+  <div class="evaluation-total-widget">
+    <apx-chart #chart [series]="chartOptions.series" [chart]="chartOptions.chart" [labels]="chartOptions.labels"
+      [responsive]="chartOptions.responsive" [noData]="chartOptions.noData" [colors]="chartOptions.colors"
+      [legend]="chartOptions.legend" [tooltip]="chartOptions.tooltip"></apx-chart>
+  </div>
+</ng-template>

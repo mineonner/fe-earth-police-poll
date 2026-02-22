@@ -1,0 +1,51 @@
+<mat-tab-group (selectedTabChange)="onSelectedTabChange($event)" [(selectedIndex)]="selectedTabIndex">
+
+  <mat-tab label="ภาพรวมทั้งหมด">
+    <ng-template matTabContent>
+      <overview></overview>
+    </ng-template>
+  </mat-tab>
+
+  <mat-tab label="บช.น./ภ.1-9">
+    <ng-template matTabContent>
+      <metropolitan-police-bureau></metropolitan-police-bureau>
+    </ng-template>
+  </mat-tab>
+
+  <mat-tab label="สตม.">
+    <ng-template matTabContent>
+      <immigration-bureau></immigration-bureau>
+    </ng-template>
+  </mat-tab>
+
+  <mat-tab label="บช.ทท.">
+    <ng-template matTabContent>
+      <tourist-police-headquarters></tourist-police-headquarters>
+    </ng-template>
+  </mat-tab>
+
+  <mat-tab label="บช.ก.">
+    <ng-template matTabContent>
+      <central-investigation-bureau></central-investigation-bureau>
+    </ng-template>
+  </mat-tab>
+
+  <mat-tab label="บช.ส.">
+    <ng-template matTabContent>
+      <police-special-branch-headquarters></police-special-branch-headquarters>
+    </ng-template>
+  </mat-tab>
+
+  <mat-tab label="สพฐ.ตร.">
+    <ng-template matTabContent>
+      <office-of-prove-evidence></office-of-prove-evidence>
+    </ng-template>
+  </mat-tab>
+
+  <mat-tab label="รพ.ตร.">
+    <ng-template matTabContent>
+      <police-general-hospital></police-general-hospital>
+    </ng-template>
+  </mat-tab>
+
+</mat-tab-group>

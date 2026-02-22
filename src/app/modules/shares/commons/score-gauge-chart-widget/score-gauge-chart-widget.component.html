@@ -1,0 +1,11 @@
+<div class="score-gauge-content">
+  <div [id]="comName" class="score-gauge"></div>
+  <div class="score-text">
+    <p class="good" *ngIf="goodScore?.start <= satisfactionScore && satisfactionScore <= goodScore?.end">
+      ผลประเมินอยู่ในระดับดี</p>
+    <p class="normal" *ngIf="normalScore?.start <= satisfactionScore && satisfactionScore <= normalScore?.end">
+      ผลประเมินอยู่ในระดับพอใช้</p>
+    <p class="bad" *ngIf="badScore?.start <= satisfactionScore && satisfactionScore <= badScore?.end">
+      ผลประเมินอยู่ในระดับปรับปรุง</p>
+  </div>
+</div>

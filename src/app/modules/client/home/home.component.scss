@@ -1,0 +1,163 @@
+.home-content {
+  max-width: 1920px;
+  position: relative;
+  margin: auto;
+
+  .top-bar {
+    background-color: #060b7e;
+    padding: 1rem 10rem;
+    position: relative;
+    display: flex;
+    gap: 1rem;
+
+    .logo {
+      height: 100px;
+    }
+  }
+
+  .summary-content {
+    background-color: rgba(35, 38, 197, 0.5);
+    // position: absolute;
+    // left: 0;
+    // right: 0;
+  }
+
+  .summary-info {
+    color: #ffffff;
+    max-width: 1700px;
+    margin: auto;
+    padding: 2rem 0 4rem 0;
+
+    .title-text {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 500;
+    }
+
+    .date-text {
+      margin-top: 1rem;
+      text-align: center;
+      font-size: 2rem;
+    }
+  }
+
+
+
+  .summary-container {
+    position: relative;
+  }
+
+  .police-background {
+    background-image: url(/assets/images/bg-police.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    height: 700px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    max-width: 1920px;
+    margin: auto;
+  }
+
+  .summary-detail {
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    padding: 1rem;
+    text-align: center;
+
+    .sum-de-title {
+
+      font-size: 2.4rem;
+      font-weight: 500;
+      border-bottom: 4px solid #ffffff;
+    }
+
+    .sum-de-count {
+      font-size: 3rem;
+      font-weight: 500;
+      margin: auto;
+
+      span {
+        font-size: 1.8rem;
+      }
+    }
+  }
+
+  .bg-red {
+    background-color: #cf4547;
+  }
+
+  .bg-green {
+    background-color: #1da20d;
+  }
+
+  .bg-yellow {
+    background-color: #ffb000;
+  }
+
+  .bg-pink {
+    background-color: #ff5ac7;
+  }
+
+  .filter-org-container {
+    position: relative;
+    background-color: #060b7e;
+  }
+
+  .filter-org-content {
+    padding: 2rem 0 4rem 0;
+    max-width: 1700px;
+    margin: auto;
+
+    .title-text {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 500;
+      color: #ffffff;
+      margin-bottom: 1rem;
+    }
+
+    ::ng-deep .form-control {
+      label {
+        color: #ffffff;
+      }
+    }
+  }
+
+  .org-detail {
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    padding: 1rem;
+    text-align: center;
+    color: #ffffff;
+
+    .org-title {
+      font-size: 2rem;
+      font-weight: 500;
+      border-bottom: 4px solid #ffffff;
+    }
+
+    .org-count {
+      font-size: 3rem;
+      font-weight: 500;
+      margin: auto;
+
+      span {
+        font-size: 1.8rem;
+      }
+    }
+  }
+
+  .four-score {
+    margin-top: 1rem;
+  }
+
+  .banner-container {
+    position: relative;
+    background-color: #ffffff;
+    height: 100px;
+  }
+}

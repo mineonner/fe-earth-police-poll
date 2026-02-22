@@ -1,0 +1,57 @@
+.form-control{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  label{
+    font-size: var(--font-size-default);
+    font-weight: var(--font-weight-default);
+    margin-bottom: 0.3rem;
+    transform: all ease 0.5s;
+  }
+
+  input:focus, textarea:focus{
+    border-color: var(--input-focus-color);
+    box-shadow: var(--input-focus-color) 0px 0px 5px 0px;
+  }
+
+  input:focus-visible, textarea:focus-visible{
+    outline : unset;
+  }
+
+  input:disabled, textarea:disabled{
+    background-color : #d2cecd;
+  }
+
+  .input-length{
+    display: block;
+    text-align: right;
+    color: #464f5e;
+    font-size: 0.8rem;
+    font-weight: 400;
+  }
+
+  .ng-invalid.ng-touched{
+    border-color: var(--error-color);
+  }
+
+  .required {
+    color: var(--error-color);
+    margin-left: 0.1rem;
+  }
+}
+
+::ng-deep {
+  body.tablet, body.mobile{
+    .form-control{
+      label{
+        font-size: 0.8rem !important;
+      }
+
+      .input-length{
+        font-size: 0.5rem !important;
+      }
+    }
+  }
+}
+

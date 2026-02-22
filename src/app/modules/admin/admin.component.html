@@ -1,0 +1,26 @@
+<main class="page-with-super-sidebar" [ngClass]="{'page-with-super-sidebar-fluid' : !isShowMenuSidebar}">
+
+  <admin-menu-sidebar [(isShowMenuSidebar)]="isShowMenuSidebar"></admin-menu-sidebar>
+
+  <article class="content-wrapper">
+    <section class="top-bar" [ngClass]="{'top-bar-fluid' : !isShowMenuSidebar}">
+      <button class="btn-sidebar"  (click)="isShowMenuSidebar = !isShowMenuSidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
+          <path
+            d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm120-80v-560H200v560h120Zm80 0h360v-560H400v560Zm-80 0H200h120Z" />
+        </svg>
+      </button>
+
+      <div class="user-info">
+        <p>{{userData.user}}</p>
+        <p class="more-info">{{userData.role_name}} (<span>{{userData.org_unit_name}}</span>)</p>
+      </div>
+
+      <fa-icon [icon]="'right-from-bracket'" class="logout" (click)="logout()" matTooltip="log out"></fa-icon>
+    </section>
+
+    <section class="container-fluid container-limited">
+      <router-outlet></router-outlet>
+    </section>
+  </article>
+</main>

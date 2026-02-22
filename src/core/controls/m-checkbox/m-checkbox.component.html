@@ -1,0 +1,5 @@
+<div  class="form-control">
+  <mat-checkbox [(ngModel)]="value" [disabled]="disabled"
+  (change)="onInputChange($event)">{{title}}</mat-checkbox>
+  <label>{{title}}<ng-container *ngTemplateOutlet="dTitleAddOn"></ng-container></label>
+</div>

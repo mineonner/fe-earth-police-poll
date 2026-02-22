@@ -1,0 +1,133 @@
+.menu-sidebar {
+  background-color: var(--second-color);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: calc(0px + calc(0px + 0px));
+  bottom: 0px;
+  left: 0;
+  width: var(--application-bar-left);
+  transition: all ease 200ms;
+  z-index: 20;
+
+  .sidebar-header {
+    border-bottom: 1px solid var(--primary-color);
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 5px;
+  }
+
+  .sidebar-content {
+    color: #ffffff;
+    font-size: 1.25rem;
+
+    .menu-content {
+      padding: 0.5rem;
+
+      .menu-link {
+        padding: 0.25rem;
+        display: flex;
+        gap: 0.5rem;
+        align-content: center;
+        margin-top: 3px;
+        height: 35px;
+        transition: justify-content 1s ease;
+        border-radius: .25rem;
+        overflow: hidden;
+
+        fa-icon {
+          width: 20px;
+          height: 20px;
+        }
+
+        .active-indicator {
+          width: 3px;
+          border-radius: 3px;
+          margin-right: 1px;
+        }
+      }
+
+      .menu-link:hover {
+        background-color: #dbfaff;
+        color: var(--second-color);
+      }
+
+      .menu-link.active {
+        background-color: #dbfaff;
+        color: var(--second-color);
+
+        .active-indicator {
+          background-color: var(--primary-color);
+        }
+      }
+
+      .menu-text {
+        visibility: visible;
+        opacity: 1;
+        transition: visibility 1s, opacity 1s linear;
+      }
+    }
+
+    .menu-content.menu-content-hide {
+      .menu-text {
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s, opacity 0s linear;
+        position: absolute;
+      }
+    }
+
+    // .menu-link-hide{
+    //   text-align: right;
+    // }
+  }
+}
+
+.close-menu-sidebar {
+  width: var(--application-bar-left-close);
+  // transform: translate3d(var(--application-bar-left-close), 0, 0);
+}
+
+::ng-deep {
+
+  body.responsive{
+    .backdrop {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      position: fixed;
+      display: block;
+      z-index: 13;
+      visibility: visible;
+      background-color: var(--second-color);
+      opacity: 0.7;
+      transition-duration: 400ms;
+      transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+      transition-property: background-color, visibility;
+    }
+
+    .close-menu-sidebar {
+      width: var(--application-bar-left);
+      transform: translate3d(-100%, 0, 0);
+    }
+  }
+
+  body.tablet{
+    .menu-sidebar {
+      width: 14rem;
+      .sidebar-content{
+        font-size: 1rem !important;
+      }
+    }
+  }
+
+  body.mobile{
+    .menu-sidebar {
+      width: 12rem;
+      .sidebar-content{
+        font-size: 0.8rem !important;
+      }
+    }
+  }
+}

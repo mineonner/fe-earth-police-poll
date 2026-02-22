@@ -1,0 +1,38 @@
+<ng-container *ngIf="loader then loaderBox else dataBox">
+
+</ng-container>
+
+<ng-template #loaderBox>
+    <article class="grid grid-cols-2 gap-4">
+      <m-loader [title]="'ชื่อผู้ใช้งาน'"></m-loader>
+      <m-loader [title]="'รหัสผ่าน'"></m-loader>
+      <m-loader [title]="'ระดับผู้ใช้งาน'"></m-loader>
+      <m-loader [title]="'หน่วยงาน'"></m-loader>
+    </article>
+</ng-template>
+
+<ng-template #dataBox>
+  <section class="grid grid-cols-2 gap-4">
+    <m-input-form [title]="'ชื่อผู้ใช้งาน'" [control]="f['user']" [disabled]="data.id != 0"></m-input-form>
+
+    <div class="flex w-full relative">
+      <m-input-form [title]="'รหัสผ่าน'" class="w-full" [control]="f['password']"
+        [disabled]="!f['is_reset_password'].value && data.id != 0" [maxLength]="500"></m-input-form>
+      <m-checkbox-form class="absolute top-0 right-0 mt-[-0.2rem]" [title]="'reset password'"
+        [control]="f['is_reset_password']" [disabled]="data.id == 0"
+        (inputChange)="onResetPasswordChange($event)"></m-checkbox-form>
+    </div>
+
+
+    <m-dropdowm-form [title]="'ระดับผู้ใช้งาน'" [control]="f['role_code']" [option]="roleOption"
+      (selectedChange)="onRoleCodeSelect($event);"></m-dropdowm-form>
+    <m-dropdowm-form [title]="'หน่วยงาน'" [control]="f['org_unit_code']" [option]="orgUnitOption"
+      [disabled]="!f['role_code'].value"></m-dropdowm-form>
+
+  </section>
+
+  <article class="flex justify-end gap-3 mt-4">
+    <button class="btn-cancel" (click)="cancel()">ยกเลิก</button>
+    <button class="btn-save" (click)="saveData()">บันทึก</button>
+  </article>
+</ng-template>
