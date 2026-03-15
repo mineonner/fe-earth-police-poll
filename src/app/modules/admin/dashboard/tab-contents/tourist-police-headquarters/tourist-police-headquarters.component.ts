@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, SimpleChanges, ViewChild } from '@angular/core';
 import { EvaluatorsAmountWidgetComponent } from '../../../../shares/commons/evaluators-amount-widget/evaluators-amount-widget.component';
 import { EvaluationTotalWidgetComponent } from '../../../../shares/commons/evaluation-total-widget/evaluation-total-widget.component';
 import { FourScoreTypeWidgetComponent } from '../../../../shares/commons/four-score-type-widget/four-score-type-widget.component';
@@ -30,6 +30,8 @@ export class TouristPoliceHeadquartersComponent {
   @ViewChild("four") four: FourScoreTypeWidgetComponent;
   @ViewChild("scoGauge") scoGauge: ScoreGaugeChartWidgetComponent;
 
+  @Input() years:string;
+
   data: DashboardResModel[];
   orgUnitCodes: string[] = ['BCH12'];
   categoriesEvTo: string[] = ['ดำเนินการแล้ว', 'ยังไม่ได้ดำเนินการ'];
@@ -50,11 +52,17 @@ export class TouristPoliceHeadquartersComponent {
 
   }
 
-  async ngAfterViewInit() {
+  async ngOnChanges(changes: SimpleChanges) {
+    if ('years' in changes) {
+      await this.initDashBoard();
+    }
+  }
+
+  async initDashBoard() {
     this.loader = true;
     let dash: DashboardReqModel = {
       head_org: this.orgUnitCodes,
-      years: '2568'
+      years: this.years
     }
     let evaluatorsTotal = 0;
     let evaluatorsCount = 0;

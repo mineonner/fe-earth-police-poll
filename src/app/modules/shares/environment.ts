@@ -1,4 +1,4 @@
-const local = "https://localhost:7247";
+const local = "http://localhost:5000";
 const production = "https://police-poll-service.azurewebsites.net";
 const container = "/service";
 

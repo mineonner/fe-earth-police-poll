@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { EvaluatorsAmountWidgetComponent } from '../../../../shares/commons/evaluators-amount-widget/evaluators-amount-widget.component';
 import { EvaluationTotalWidgetComponent } from '../../../../shares/commons/evaluation-total-widget/evaluation-total-widget.component';
 import { FourScoreTypeWidgetComponent } from '../../../../shares/commons/four-score-type-widget/four-score-type-widget.component';
@@ -17,10 +17,12 @@ import { DecimalPipe } from '@angular/common';
   styleUrl: './metropolitan-police-bureau.component.scss',
   standalone: false
 })
-export class MetropolitanPoliceBureauComponent implements OnInit {
+export class MetropolitanPoliceBureauComponent {
   @ViewChild("evAmo") evAmo: EvaluatorsAmountWidgetComponent;
   @ViewChild("evTo") evTo: EvaluationTotalWidgetComponent;
   @ViewChild("scoGauge") scoGauge: ScoreGaugeChartWidgetComponent;
+
+  @Input() years:string;
 
   data: DashboardResModel[];
   filterData: FilterDashboardResModel;
@@ -43,11 +45,17 @@ export class MetropolitanPoliceBureauComponent implements OnInit {
 
   }
 
-  async ngOnInit() {
+  async ngOnChanges(changes: SimpleChanges) {
+    if ('years' in changes) {
+      await this.initDashBoard();
+    }
+  }
+
+  async initDashBoard() {
     this.loader = true;
     let dash: DashboardReqModel = {
       head_org: this.orgUnitCodes,
-      years: '2568'
+      years: this.years
     }
 
     let evaluatorsTotal = 0;

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { StackColumnWidgetComponent } from '../../../../shares/commons/stack-column-widget/stack-column-widget.component';
 import { EvaluatorsAmountWidgetComponent } from '../../../../shares/commons/evaluators-amount-widget/evaluators-amount-widget.component';
 import { EvaluationTotalWidgetComponent } from '../../../../shares/commons/evaluation-total-widget/evaluation-total-widget.component';
@@ -14,11 +14,13 @@ import { DashboardReqModel } from '../../../../shares/models/request/dashboard-r
   templateUrl: './overview.component.html',
   styleUrl: './overview.component.scss'
 })
-export class OverviewComponent implements OnInit {
+export class OverviewComponent implements OnInit, OnChanges {
   @ViewChild("stackCol") stackCol: StackColumnWidgetComponent
   @ViewChild("evAmo") evAmo: EvaluatorsAmountWidgetComponent
   @ViewChild("evTo") evTo: EvaluationTotalWidgetComponent
   @ViewChild("evSco") evSco: EvaluationScoreWidgetComponent
+
+  @Input() years: string;
 
   data: DashboardResModel[];
 
@@ -26,10 +28,20 @@ export class OverviewComponent implements OnInit {
 
   }
 
+  async ngOnChanges(changes: SimpleChanges){
+    if('years' in changes){
+      await this.initDashBoard();
+    }
+  }
+
   async ngOnInit() {
+  //  await this.initDashBoard();
+  }
+
+  async initDashBoard() {
     let dash: DashboardReqModel = {
       head_org: [],
-      years: '2568'
+      years: this.years
     };
 
     try {
@@ -69,16 +81,14 @@ export class OverviewComponent implements OnInit {
         this.evSco.setData(seriesCol, headOrgUnit);
       }
     } catch (ex) {
-        this.evAmo.setData({
-          evaluatorsTotal: 0,
-          evaluatorsCount: 0,
-          evluationDate: ''
-        });
-        this.stackCol.setData([], []);
-        this.evTo.setData([], []);
-        this.evSco.setData([], []);
+      this.evAmo.setData({
+        evaluatorsTotal: 0,
+        evaluatorsCount: 0,
+        evluationDate: ''
+      });
+      this.stackCol.setData([], []);
+      this.evTo.setData([], []);
+      this.evSco.setData([], []);
     }
-
-
   }
 }

@@ -1,4 +1,4 @@
-import { AfterViewChecked, AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, Input, SimpleChanges, ViewChild } from '@angular/core';
 import { EvaluatorsAmountWidgetComponent } from '../../../../shares/commons/evaluators-amount-widget/evaluators-amount-widget.component';
 import { EvaluationTotalWidgetComponent } from '../../../../shares/commons/evaluation-total-widget/evaluation-total-widget.component';
 import { FourScoreTypeWidgetComponent } from '../../../../shares/commons/four-score-type-widget/four-score-type-widget.component';
@@ -20,6 +20,8 @@ export class ImmigrationBureauComponent implements AfterViewInit {
   @ViewChild("evTo") evTo: EvaluationTotalWidgetComponent;
   @ViewChild("scoGauge") scoGauge: ScoreGaugeChartWidgetComponent;
 
+  @Input() years: string;
+
   data: DashboardResModel[];
   orgUnitCodes: string[] = ['BCH11'];
   categoriesEvTo: string[] = ['ดำเนินการแล้ว', 'ยังไม่ได้ดำเนินการ'];
@@ -40,11 +42,22 @@ export class ImmigrationBureauComponent implements AfterViewInit {
 
   }
 
+
+  async ngOnChanges(changes: SimpleChanges) {
+    if ('years' in changes) {
+      await this.initDashBoard();
+    }
+  }
+
   async ngAfterViewInit() {
+
+  }
+
+  async initDashBoard() {
     this.loader = true;
     let dash: DashboardReqModel = {
       head_org: this.orgUnitCodes,
-      years: '2568'
+      years: this.years
     }
     let evaluatorsTotal = 0;
     let evaluatorsCount = 0;
