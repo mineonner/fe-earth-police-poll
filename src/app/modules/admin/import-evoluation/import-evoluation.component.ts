@@ -24,7 +24,7 @@ export class ImportEvoluationComponent {
     bk_org_unit: '',
     kk_org_unit: '',
     org_unit: '',
-    evaluation_years: '2568'
+    evaluation_years: (new Date().getFullYear() + 543).toString()
   }
   loadData: boolean = false;
 

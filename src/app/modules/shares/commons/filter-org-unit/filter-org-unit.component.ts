@@ -33,7 +33,7 @@ export class FilterOrgUnitComponent implements AfterViewInit, OnChanges {
   BKOption: OrgUnitDropdownResModel[] = [];
   KKOption: OrgUnitDropdownResModel[] = [];
   ORGOption: OrgUnitDropdownResModel[] = [];
-
+  yearsOption:BaseOptionDropdownModel[] = [];
 
 
   constructor(private _service: AdminService,
@@ -54,7 +54,7 @@ export class FilterOrgUnitComponent implements AfterViewInit, OnChanges {
 
   public async loadMasterDropdown() {
     this.loader = true;
-    await Promise.all([this.getBCHOption(), this.getBKOption(), this.getKKOption(), this.getORGOption()]);
+    await Promise.all([this.getBCHOption(), this.getBKOption(), this.getKKOption(), this.getORGOption(), this.getYearsOption()]);
     this.loader = false;
   }
 
@@ -177,6 +177,17 @@ export class FilterOrgUnitComponent implements AfterViewInit, OnChanges {
     }
   }
 
+  private getYearsOption(): void {
+    const currentCeYear = new Date().getFullYear();
+    const currentBeYear = currentCeYear + 543; // แปลง ค.ศ. เป็น พ.ศ.
+    this.filter.evaluation_years = currentBeYear.toString();
+    this.yearsOption = [];
+    for (let i = 0; i <= 5; i++) {
+      const year = (currentBeYear - i).toString();
+      this.yearsOption.push({ id: year, name: year });
+    }
+  }
+
   // event
   async BCHValueChange(obj: BaseOptionDropdownModel) {
     this.filter.bch_org_unit_name = obj.name;
@@ -215,6 +226,11 @@ export class FilterOrgUnitComponent implements AfterViewInit, OnChanges {
 
   async ORGValueChange(obj: BaseOptionDropdownModel) {
     this.filter.org_unit_name = obj.name;
+    this.filterChange.emit(this.filter);
+  }
+
+  yearsValueChange(obj: BaseOptionDropdownModel) {
+    this.filter.evaluation_years = obj.id;
     this.filterChange.emit(this.filter);
   }
 }

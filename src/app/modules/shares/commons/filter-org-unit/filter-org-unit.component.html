@@ -25,4 +25,7 @@
   <m-dropdown [title]="'หน่วยงาน'" [(value)]="filter.org_unit" [option]="ORGOption" (searchChange)="getORGOption($event)" [disabled]="ORGOption.length == 0"
     (selectedChange)="ORGValueChange($event)"></m-dropdown>
 
+    <m-dropdown [title]="'ปีประเมิน'" [(value)]="filter.evaluation_years" [option]="yearsOption" [disabled]="yearsOption.length == 0"
+    (selectedChange)="yearsValueChange($event)"></m-dropdown>
+
 </ng-template>
