@@ -5,6 +5,7 @@ import { MUtilsService } from '../../../../core/services/util.service';
 import { AlertService } from '../../../../core/services/alert.service';
 import { ApexOptions } from 'apexcharts';
 import { OrgUnitMasterListResModel } from '../../shares/models/respone/org-unit-master-list-res.model';
+import { BaseOptionDropdownModel } from '../../../../core/models/BaseOptionDropdown.model';
 
 @Component({
   selector: 'compare-score-years',
@@ -17,6 +18,19 @@ export class CompareScoreYearsComponent {
   chartColumnOptions: ApexOptions;
   isShowLineChart: boolean = false;
   isShowColumnChart: boolean = false;
+  filter: FilterDashboardReqModel = {
+    bch_org_unit: "",
+    bch_org_unit_name: "",
+    bk_org_unit: "",
+    bk_org_unit_name: "",
+    kk_org_unit: "",
+    kk_org_unit_name: "",
+    org_unit: "",
+    org_unit_name: "",
+    evaluation_years: "",
+    compare_evaluation_years: ""
+  }
+  yearsOption:BaseOptionDropdownModel[] = [];
 
   constructor(private _service: AdminService
     , private _util: MUtilsService
@@ -98,7 +112,14 @@ export class CompareScoreYearsComponent {
     }
   }
 
+  async ngOnInit() {
+    await this.getYearsOption();
+  }
+
   async onFilterChange(obj: FilterDashboardReqModel) {
+    obj.compare_evaluation_years = this.filter.compare_evaluation_years;
+    obj.evaluation_years = this.filter.evaluation_years;
+    this.filter = obj;
     await this.searchDashboardScoreCompareYears(obj);
   }
 
@@ -146,6 +167,18 @@ export class CompareScoreYearsComponent {
       + obj.crime_prevention_work_total + obj.traffic_work_total), 0) > 0) this.isShowLineChart = true;
 
     if (data.reduce((sum, obj) => sum + obj.satisfaction_total, 0) > 0) this.isShowColumnChart = true;
+  }
+
+  private getYearsOption(): void {
+    const currentCeYear = new Date().getFullYear();
+    const currentBeYear = currentCeYear + 543; // แปลง ค.ศ. เป็น พ.ศ.
+    this.filter.evaluation_years = currentBeYear.toString();
+    this.filter.compare_evaluation_years = (currentBeYear - 1).toString();
+    this.yearsOption = [];
+    for (let i = 0; i <= 5; i++) {
+      const year = (currentBeYear - i).toString();
+      this.yearsOption.push({ id: year, name: year });
+    }
   }
 
 }

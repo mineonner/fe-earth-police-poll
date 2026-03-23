@@ -45,7 +45,7 @@ export class ImmigrationBureauComponent implements AfterViewInit {
 
   async ngOnChanges(changes: SimpleChanges) {
     if ('years' in changes) {
-      await this.initDashBoard();
+      await Promise.all([this.initDashBoard(), this.onFilterChange(this.filter)]);
     }
   }
 
@@ -95,8 +95,10 @@ export class ImmigrationBureauComponent implements AfterViewInit {
   }
 
   async onFilterChange(obj: FilterDashboardReqModel) {
+    if(!obj) return;
     this.loaderFilter = true;
     this.filterData = null;
+    obj.evaluation_years = this.years;
     this.filter = obj;
     this.filterData = await this._service.searchFilterDashboard(obj);
     this.seriesBCH = !!this.filterData.bch_org_unit ? [this.filterData.bch_org_unit.evaluators_count, this.filterData.bch_org_unit.unevaluators_count] : [];

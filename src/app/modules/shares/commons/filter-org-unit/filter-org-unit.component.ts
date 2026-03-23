@@ -26,6 +26,7 @@ export class FilterOrgUnitComponent implements AfterViewInit, OnChanges {
   }
   @Input() orgUnitCodes: string[] = [];
   @Input() isClient: boolean = false;
+  @Input() isShowEvaluationYears: boolean = false;
   @Output() filterChange: EventEmitter<FilterDashboardReqModel> = new EventEmitter<FilterDashboardReqModel>();
   loader = true;
 

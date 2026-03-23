@@ -8,4 +8,5 @@ export interface FilterDashboardReqModel {
   org_unit: string;
   org_unit_name?: string;
   evaluation_years?: string;
+  compare_evaluation_years?: string;
 }

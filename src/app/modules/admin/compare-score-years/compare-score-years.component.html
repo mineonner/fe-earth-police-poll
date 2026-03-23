@@ -1,6 +1,14 @@
 <section class="mt-4">
   <article>
     <filter-org-unit #filterOrg (filterChange)="onFilterChange($event)"></filter-org-unit>
+    <div class="grid grid-col-1 sm:grid-cols-2 md:grid-cols-4 gap-4 pt-2">
+      <m-dropdown [title]="'ปีเริ่มต้นประเมิน'" [(value)]="filter.compare_evaluation_years" [option]="yearsOption"
+        [disabled]="yearsOption.length == 0" (selectedChange)="onFilterChange(filter)"></m-dropdown>
+
+      <m-dropdown [title]="'ปีสิ้นประเมิน'" [(value)]="filter.evaluation_years" [option]="yearsOption"
+        [disabled]="yearsOption.length == 0" (selectedChange)="onFilterChange(filter)"></m-dropdown>
+    </div>
+
   </article>
 
   <!-- <article class="mt-4" *ngIf="isShowLineChart">
@@ -9,9 +17,10 @@
 
   <article class="mt-4" *ngIf="isShowLineChart">
     <div id="chart">
-      <apx-chart [series]="chartLineOptions.series" [chart]="chartLineOptions.chart" [xaxis]="chartLineOptions.xaxis" [yaxis]="chartLineOptions.yaxis"
-        [dataLabels]="chartLineOptions.dataLabels" [grid]="chartLineOptions.grid" [stroke]="chartLineOptions.stroke"
-        [title]="chartLineOptions.title" [colors]="chartLineOptions.colors" [markers]="chartLineOptions.markers" [dataLabels]="chartLineOptions.dataLabels"
+      <apx-chart [series]="chartLineOptions.series" [chart]="chartLineOptions.chart" [xaxis]="chartLineOptions.xaxis"
+        [yaxis]="chartLineOptions.yaxis" [dataLabels]="chartLineOptions.dataLabels" [grid]="chartLineOptions.grid"
+        [stroke]="chartLineOptions.stroke" [title]="chartLineOptions.title" [colors]="chartLineOptions.colors"
+        [markers]="chartLineOptions.markers" [dataLabels]="chartLineOptions.dataLabels"
         [legend]="chartLineOptions.legend"></apx-chart>
     </div>
   </article>

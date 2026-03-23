@@ -1,4 +1,4 @@
-<filter-org-unit #filterOrg [orgUnitCodes]="orgUnitCodes" (filterChange)="onFilterChange($event)"></filter-org-unit>
+<filter-org-unit #filterOrg [orgUnitCodes]="orgUnitCodes" (filterChange)="onFilterChange($event)" [isShowEvaluationYears]="true"></filter-org-unit>
 
 <div class="mt-4">
   <button class="btn-import mr-2" (click)="importDialog()"><fa-icon icon="upload" class="mr-2"></fa-icon>เพิ่มการประเมิน</button>
