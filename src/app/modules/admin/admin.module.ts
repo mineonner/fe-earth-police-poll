@@ -26,6 +26,7 @@ import { ImportEvoluationDialogComponent } from './import-evoluation/import-evol
 import { CompareScoreYearsComponent } from './compare-score-years/compare-score-years.component';
 import { UserComponent } from './user/user.component';
 import { UserDialogComponent } from './user/user-dialog/user-dialog.component';
+import { ImportOrgUnitMasterDialogComponent } from './org-unit-master/import-org-unit-master-dialog/import-org-unit-master-dialog.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { UserDialogComponent } from './user/user-dialog/user-dialog.component';
     , CompareScoreYearsComponent
     , UserComponent
     , UserDialogComponent
+    , ImportOrgUnitMasterDialogComponent
   ],
   imports: [
     CommonModule,

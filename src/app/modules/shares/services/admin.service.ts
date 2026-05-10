@@ -21,6 +21,7 @@ import { ImportEvoluationReqModel } from "../models/request/import-evoluation-re
 import { SearchUserResModel } from "../models/respone/search-user-res.model";
 import { UpdateUserReqModel } from "../models/request/update-user-req.model";
 import { BaseDropdownRequestModel } from "../../../../core/models/BaseDropdownRequest.model";
+import { ImportOrgUnitMasterReqModel } from "../models/request/import-org-unit-master-req.model";
 
 @Injectable({
   providedIn: 'root'
@@ -89,6 +90,12 @@ export class AdminService {
   importEvaluation(body: ImportEvoluationReqModel[]) {
     const headers = { 'Authorization': `Bearer ${this._auth.accessToken}` }
     return firstValueFrom(this._http.post<DataResModel<any>>(`${environment.apis.server}/api/police-pollAd/importEvaluation`, body, { headers })
+      .pipe(catchError(error => this.handleError(error)), map(o => o)))
+  }
+
+  importOrgUnitMaster(body: ImportOrgUnitMasterReqModel[]) {
+    const headers = { 'Authorization': `Bearer ${this._auth.accessToken}` }
+    return firstValueFrom(this._http.post<DataResModel<any>>(`${environment.apis.server}/api/police-pollAd/importOrgUnitMaster`, body, { headers })
       .pipe(catchError(error => this.handleError(error)), map(o => o)))
   }
 

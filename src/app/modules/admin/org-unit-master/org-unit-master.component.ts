@@ -23,6 +23,7 @@ export class OrgUnitMasterComponent implements AfterViewInit {
   pageIndex: number = 0;
   loadData: boolean = false;
   isShowDialog: boolean = false;
+  isShowDialogImport: boolean = false;
   dataDialog: OrgUnitMasterListResModel;
   filterData: FilterDashboardReqModel = {
     bch_org_unit: '',
@@ -110,11 +111,21 @@ export class OrgUnitMasterComponent implements AfterViewInit {
 
   closeDialog() {
     this.isShowDialog = false;
+    this.isShowDialogImport = false;
   }
 
   async submitDialog() {
     this.closeDialog();
     this.pageIndex = 0;
     await Promise.all([this.filterOrg.loadMasterDropdown(), this.searchOrgUnitMasterList(this.filterData)]);
+  }
+
+  importOrgUnit() {
+    this.isShowDialogImport = true;
+  }
+
+  async onsubmitDialog() {
+    this.closeDialog();
+    await this.searchOrgUnitMasterList(this.filterData);
   }
 }
